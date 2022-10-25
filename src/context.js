@@ -84,11 +84,21 @@ const AppProvider = ({ children }) => {
   }
 
   const handleChange = (e) => {
-    console.log(e)
+    const name = e.target.name
+    const value = e.target.value
+    console.log(name, value)
+    setQuiz({ ...quiz, [name]: value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const { amount, category, difficulty } = quiz
+    // const tempUrl =
+    //   'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple'
+
+    const url = `${API_ENDPOINT}amount=${amount}&category=${table[category]}&difficulty=${difficulty}&type=multiple`
+    // const url = `${API_ENDPOINT}amount=${amount}&difficulty=${difficulty}&category=${table[category]}&type=multiple`
+    fetchQuestions(url)
   }
 
   // useEffect(() => {
